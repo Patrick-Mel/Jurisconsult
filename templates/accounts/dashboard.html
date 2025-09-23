@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mon tableau de bord</h2>
+<p>Bienvenue, {{ request.user.get_full_name|default:request.user.username }}.</p>
+<ul>
+  <li><a href="/consultations/">Mes consultations</a></li>
+  <li><a href="/messagerie/">Ma messagerie</a></li>
+  <li><a href="/avocats/">Trouver un avocat</a></li>
+</ul>
+{% endblock %}
+
+

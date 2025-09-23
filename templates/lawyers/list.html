@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Avocats</h2>
+<form class="row g-2 mb-3" method="get">
+  <div class="col-md-4">
+    <input class="form-control" type="text" name="q" value="{{ q }}" placeholder="Nom de l’avocat">
+  </div>
+  <div class="col-md-3">
+    <input class="form-control" type="text" name="ville" value="{{ ville }}" placeholder="Ville">
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" name="specialite">
+      <option value="">Toutes les spécialités</option>
+      {% for s in specialties %}
+      <option value="{{ s.id }}" {% if specialite == s.id|stringformat:'s' %}selected{% endif %}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary w-100" type="submit">Rechercher</button>
+  </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-2 g-3">
+  {% for l in lawyers %}
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'lawyers:profile' l.id %}">{{ l.get_full_name|default:l.username }}</a></h5>
+        <p class="card-text mb-1">Ville: {{ l.city|default:'-' }}</p>
+        <p class="card-text">Expérience: {{ l.lawyer_profile.years_of_experience }} ans</p>
+        <a class="btn btn-outline-primary" href="{% url 'consultations:book' %}?lawyer={{ l.id }}">Demander une consultation</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>Aucun avocat trouvé.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+
+

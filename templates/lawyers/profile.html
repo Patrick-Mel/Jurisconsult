@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4>{{ lawyer.get_full_name|default:lawyer.username }}</h4>
+        <p class="mb-1">Ville: {{ lawyer.city|default:'-' }}</p>
+        <p class="mb-1">Expérience: {{ lawyer.lawyer_profile.years_of_experience }} ans</p>
+        <p>Spécialités: {% for s in lawyer.lawyer_profile.specialties.all %}<span class="badge text-bg-primary me-1">{{ s.name }}</span>{% empty %}-{% endfor %}</p>
+        <a class="btn btn-primary" href="{% url 'consultations:book' %}">Demander une consultation</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h5>Disponibilités</h5>
+        <ul class="list-group list-group-flush">
+          {% for a in availabilities %}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>{{ a.start|date:'d/m/Y H:i' }} → {{ a.end|date:'H:i' }}</span>
+              {% if request.user.is_authenticated %}
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'consultations:book' %}?lawyer={{ lawyer.id }}">Réserver</a>
+              {% endif %}
+            </li>
+          {% empty %}
+            <li class="list-group-item">Aucune disponibilité publiée.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

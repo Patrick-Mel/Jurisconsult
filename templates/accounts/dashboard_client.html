@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Tableau de bord (Client)</h2>
+  <a class="btn btn-primary" href="{% url 'consultations:book' %}">Demander une consultation</a>
+  </div>
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Mes consultations</h5>
+        <p class="text-muted">Consultez et suivez vos demandes.</p>
+        <a class="btn btn-outline-primary" href="{% url 'consultations:list' %}">Voir mes consultations</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">Trouver un avocat</h5>
+        <p class="text-muted">Recherchez par spécialité, ville, expérience.</p>
+        <a class="btn btn-outline-primary" href="{% url 'lawyers:list' %}">Rechercher</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero rounded-4 p-5 mb-5 text-center text-lg-start position-relative overflow-hidden">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <h1 class="display-5 fw-bold">Votre consultation juridique, simple et sécurisée</h1>
+      <p class="lead text-muted">Trouvez un avocat certifié au Cameroun, réservez un créneau et discutez en toute confidentialité.</p>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-primary btn-lg" href="/avocats/"><i class="bi bi-search"></i> Trouver un avocat</a>
+        <a class="btn btn-outline-primary btn-lg" href="/consultations/reserver/"><i class="bi bi-calendar2-week"></i> Prendre rendez-vous</a>
+      </div>
+    </div>
+    <div class="col-lg-5 d-none d-lg-block">
+      <div class="glass p-4 rounded-4 shadow-sm">
+        <div class="d-flex align-items-center gap-3">
+          <i class="bi bi-shield-lock display-6 text-primary"></i>
+          <div>
+            <h5 class="mb-1">Messagerie sécurisée</h5>
+            <p class="mb-0 text-muted">Échange de pièces jointes et historique conservé.</p>
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center gap-3">
+          <i class="bi bi-award display-6 text-primary"></i>
+          <div>
+            <h5 class="mb-1">Avocats vérifiés</h5>
+            <p class="mb-0 text-muted">Spécialités, expérience et avis des clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card glass h-100"><div class="card-body">
+      <h5 class="card-title">Rechercher un avocat</h5>
+      <p class="card-text text-muted">Par spécialité, ville et disponibilité.</p>
+      <a class="btn btn-primary" href="/avocats/">Explorer</a>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card glass h-100"><div class="card-body">
+      <h5 class="card-title">Prendre rendez-vous</h5>
+      <p class="card-text text-muted">Choisissez la date et l’heure qui vous conviennent.</p>
+      <a class="btn btn-primary" href="/consultations/reserver/">Réserver</a>
+    </div></div>
+  </div>
+  <div class="col-md-4">
+    <div class="card glass h-100"><div class="card-body">
+      <h5 class="card-title">Messagerie sécurisée</h5>
+      <p class="card-text text-muted">Échangez des messages et des fichiers.</p>
+      <a class="btn btn-primary" href="/messagerie/">Accéder</a>
+    </div></div>
+  </div>
+</div>
+{% endblock %}
+
+

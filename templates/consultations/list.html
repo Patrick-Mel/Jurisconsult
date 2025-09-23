@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mes consultations</h2>
+<a class="btn btn-primary mb-3" href="{% url 'consultations:book' %}">Demander une nouvelle consultation</a>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date/Heure</th>
+        <th>Client</th>
+        <th>Avocat</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in consultations %}
+      <tr>
+        <td>{{ c.scheduled_at|date:'d/m/Y H:i' }}</td>
+        <td>{{ c.client.get_full_name|default:c.client.username }}</td>
+        <td>{{ c.lawyer.get_full_name|default:c.lawyer.username }}</td>
+        <td>{{ c.get_status_display }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">Aucune consultation.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+{% endblock %}
+
+
