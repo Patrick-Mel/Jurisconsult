@@ -9,13 +9,14 @@
     {% load static %}
     <link rel="icon" href="{% static 'img/logo.png' %}" sizes="any">
     <link href="{% static 'css/theme.css' %}" rel="stylesheet">
+    <script defer src="{% static 'js/theme.js' %}"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-primary" href="/">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="/">
           <img src="{% static 'img/logo.png' %}" alt="Logo" width="36" height="36" class="rounded-circle shadow-sm object-fit-cover">
-          <span>Jurisconsult</span>
+          <span><span class="brand-juris">Juris</span><span class="brand-consult">consult</span></span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Menu">
           <span class="navbar-toggler-icon"></span>
@@ -25,9 +26,20 @@
             <li class="nav-item"><a class="nav-link" href="/avocats/">Avocats</a></li>
             <li class="nav-item"><a class="nav-link" href="/consultations/">Consultations</a></li>
             <li class="nav-item"><a class="nav-link" href="/messagerie/">Messagerie</a></li>
+            <li class="nav-item"><a class="nav-link" href="/a-propos/">À propos / Contact</a></li>
+            <li class="nav-item">
+              <button id="themeToggle" class="btn btn-sm btn-outline-secondary" type="button" title="Thème">
+                <i class="bi bi-moon-stars"></i>
+              </button>
+            </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item"><a class="btn btn-outline-primary" href="/comptes/tableau-de-bord/">Mon tableau de bord</a></li>
-              <li class="nav-item"><a class="btn btn-link" href="/comptes/deconnexion/">Se déconnecter</a></li>
+              <li class="nav-item">
+                <form method="post" action="/comptes/deconnexion/" class="d-inline">
+                  {% csrf_token %}
+                  <button class="btn btn-link" type="submit">Se déconnecter</button>
+                </form>
+              </li>
             {% else %}
               <li class="nav-item"><a class="btn btn-outline-primary" href="/comptes/connexion/">Se connecter</a></li>
               <li class="nav-item"><a class="btn btn-primary" href="/comptes/inscription/">Créer un compte</a></li>

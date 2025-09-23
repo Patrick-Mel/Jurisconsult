@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-6">
+    <h2>À propos</h2>
+    <p>Jurisconsult est une plateforme de mise en relation entre clients et avocats au Cameroun, permettant la prise de rendez-vous, la messagerie sécurisée et le suivi des consultations.</p>
+    <ul>
+      <li>Transparence et sécurité</li>
+      <li>Avocats vérifiés</li>
+      <li>Interface moderne et responsive</li>
+    </ul>
+  </div>
+  <div class="col-lg-6">
+    <h2>Contact</h2>
+    <form method="post" class="mt-3 glass p-3 rounded-3">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-primary" type="submit">Envoyer</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+

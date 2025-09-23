@@ -4,6 +4,8 @@
   --jc-bg:#f8f9fa;
   --jc-glass-bg: rgba(255,255,255,.6);
   --jc-glass-br: 16px;
+  --brand-green:#0e8457;
+  --brand-red:#c8102e;
 }
 body{ background:var(--jc-bg); }
 .navbar-brand{ letter-spacing:.3px; }
@@ -12,9 +14,26 @@ body{ background:var(--jc-bg); }
 .btn-outline-primary{ border-color:var(--jc-primary); color:var(--jc-primary); }
 .btn-outline-primary:hover{ background:var(--jc-primary); color:#fff; }
 footer{ color:var(--jc-muted); }
+.brand-juris{ color:var(--brand-green); }
+.brand-consult{ color:var(--brand-red); }
 
 .hero{
-  background: radial-gradient(1200px 600px at 10% 10%, #e9f2ff 0, transparent 60%), radial-gradient(1200px 600px at 90% 10%, #ffe9f3 0, transparent 60%);
+  background:
+    linear-gradient(90deg, rgba(14,132,87,.08), rgba(200,16,46,.08), rgba(255,215,0,.08)),
+    radial-gradient(1200px 600px at 10% 10%, #e9f2ff 0, transparent 60%),
+    radial-gradient(1200px 600px at 90% 10%, #ffe9f3 0, transparent 60%);
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background-image:url('/static/img/cmr-flag-texture.png');
+  background-size:cover; background-position:center; opacity:.06;
 }
 .glass{ background: var(--jc-glass-bg); backdrop-filter: blur(10px); border-radius: var(--jc-glass-br); }
+
+/* Dark theme */
+[data-theme="dark"] body{ background:#0b0f14; color:#e6e6e6; }
+[data-theme="dark"] .navbar, [data-theme="dark"] .card, [data-theme="dark"] .glass{ background:rgba(16,20,27,.6)!important; color:#e6e6e6; }
+[data-theme="dark"] .btn-outline-primary{ color:#8cbcff; border-color:#8cbcff; }
+[data-theme="dark"] footer{ color:#9aa4af; }
 
