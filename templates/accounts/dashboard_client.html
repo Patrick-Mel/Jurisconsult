@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Tableau de bord (Client)</h2>
+  <h2>Tableau de bord — Client · {{ request.user.get_full_name|default:request.user.username }}</h2>
   <a class="btn btn-primary" href="{% url 'consultations:book' %}">Demander une consultation</a>
   </div>
 <div class="row g-3">

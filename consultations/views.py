@@ -18,7 +18,9 @@ class BookingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['lawyer'].queryset = User.objects.filter(role=User.Roles.LAWYER)
+        # Ensure the dropdown shows real lawyer names instead of usernames
+        self.fields['lawyer'].queryset = User.objects.filter(role=User.Roles.LAWYER).order_by('first_name', 'last_name')
+        self.fields['lawyer'].label_from_instance = lambda obj: (obj.get_full_name() or obj.username)
         lawyer_id = None
         if 'initial' in kwargs:
             lawyer_id = kwargs['initial'].get('lawyer')

@@ -21,21 +21,23 @@ class Command(BaseCommand):
 
         # 5 autres avocats crédibles
         demo_lawyers = [
-            {"username":"avocat2","first_name":"Brigitte","last_name":"Ewondo","city":"Yaoundé","exp":8,"firm":"Cabinet Ewondo","specs":[civil]},
-            {"username":"avocat3","first_name":"Samuel","last_name":"Abega","city":"Douala","exp":12,"firm":"Abega Legal","specs":[penal]},
-            {"username":"avocat4","first_name":"Mireille","last_name":"Ngono","city":"Bafoussam","exp":6,"firm":"Ngono & Associés","specs":[civil]},
-            {"username":"avocat5","first_name":"Armand","last_name":"Ewane","city":"Garoua","exp":10,"firm":"Ewane Law","specs":[penal, civil]},
-            {"username":"avocat6","first_name":"Cynthia","last_name":"Mbarga","city":"Limbe","exp":4,"firm":"CM Avocats","specs":[civil]},
+            {"first_name":"Brigitte","last_name":"Ewondo","city":"Yaoundé","exp":8,"firm":"Cabinet Ewondo","specs":[civil]},
+            {"first_name":"Samuel","last_name":"Abega","city":"Douala","exp":12,"firm":"Abega Legal","specs":[penal]},
+            {"first_name":"Mireille","last_name":"Ngono","city":"Bafoussam","exp":6,"firm":"Ngono & Associés","specs":[civil]},
+            {"first_name":"Armand","last_name":"Ewane","city":"Garoua","exp":10,"firm":"Ewane Law","specs":[penal, civil]},
+            {"first_name":"Cynthia","last_name":"Mbarga","city":"Limbe","exp":4,"firm":"CM Avocats","specs":[civil]},
         ]
         for dl in demo_lawyers:
-            u, _ = User.objects.get_or_create(username=dl["username"], defaults={
+            username = (dl["first_name"].lower() + "." + dl["last_name"].lower()).replace(" ", "")
+            u, _ = User.objects.get_or_create(username=username, defaults={
                 "first_name": dl["first_name"], "last_name": dl["last_name"], "city": dl["city"], "role": User.Roles.LAWYER
             })
             u.set_password("password123"); u.save()
             lp, _ = LawyerProfile.objects.get_or_create(user=u, defaults={"years_of_experience": dl["exp"], "law_firm": dl["firm"]})
             lp.specialties.set(dl["specs"]) 
 
-        cl1, _ = User.objects.get_or_create(username="client1", defaults={
+        cl1_username = "amina.ndiaye"
+        cl1, _ = User.objects.get_or_create(username=cl1_username, defaults={
             "first_name": "Amina", "last_name": "Ndiaye", "city": "Yaoundé", "role": User.Roles.CLIENT
         })
         cl1.set_password("password123"); cl1.save()

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Tableau de bord (Avocat)</h2>
-  <a class="btn btn-primary" href="/consultations/">Voir mes consultations</a>
+  <h2>Tableau de bord — Avocat · {{ request.user.get_full_name|default:request.user.username }}</h2>
+  <a class="btn btn-primary" href="{% url 'consultations:list' %}">Voir mes consultations</a>
   </div>
 <div class="row g-3">
   <div class="col-md-6">
@@ -10,7 +10,7 @@
       <div class="card-body">
         <h5 class="card-title">Demandes en attente</h5>
         <p class="text-muted">Acceptez ou refusez les nouveaux rendez-vous.</p>
-        <a class="btn btn-outline-primary" href="/consultations/">Gérer</a>
+        <a class="btn btn-outline-primary" href="{% url 'consultations:list' %}">Gérer</a>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
       <div class="card-body">
         <h5 class="card-title">Mon profil</h5>
         <p class="text-muted">Mettez à jour vos informations professionnelles.</p>
-        <a class="btn btn-outline-primary" href="/avocats/">Voir mon profil public</a>
+        <a class="btn btn-outline-primary" href="{% url 'lawyers:list' %}">Voir mon profil public</a>
       </div>
     </div>
   </div>
