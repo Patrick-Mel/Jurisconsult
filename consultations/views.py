@@ -42,14 +42,11 @@ def book(request):
             cons = form.save(commit=False)
             cons.client = request.user
             cons.status = Consultation.Status.PENDING
-            # Validation de disponibilité simple: chevauchement
-            overlaps = Availability.objects.filter(
-                lawyer=cons.lawyer,
-                start__lte=cons.scheduled_at,
-                end__gte=cons.scheduled_at,
-            ).exists()
-            if not overlaps:
-                form.add_error('scheduled_at', _('L’horaire choisi ne correspond pas aux disponibilités de l’avocat.'))
+            # Nouvelle règle: tous les avocats sont disponibles de 07:00 à 18:00
+            hour = cons.scheduled_at.hour
+            within_hours = 7 <= hour < 18
+            if not within_hours:
+                form.add_error('scheduled_at', _('Veuillez choisir un horaire entre 07:00 et 18:00.'))
             else:
                 cons.save()
                 return redirect('accounts:dashboard')
